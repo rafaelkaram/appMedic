@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Appointments", {
-      id: {
+	up: async (queryInterface, Sequelize) => {
+		await queryInterface.createTable("Appointments", {
+			id: {
 				type: Sequelize.INTEGER,
 				primaryKey: true,
 				autoIncrement: true,
@@ -12,19 +12,19 @@ module.exports = {
 			physicianId: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
-        references: {model: "Physicians",key:"id"},
-        onUpdate: "RESTRICT",
-        onDelete: "RESTRICT"
+				references: { model: "Physicians", key: "id" },
+				onUpdate: "RESTRICT",
+				onDelete: "RESTRICT"
 			},
-      patientId: {
+			patientId: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
-        references: {model: "Patients",key:"id"},
-        onUpdate: "RESTRICT",
-        onDelete: "RESTRICT"
+				references: { model: "Patients", key: "id" },
+				onUpdate: "RESTRICT",
+				onDelete: "RESTRICT"
 			},
 			appointmentDate: {
-        type: Sequelize.DATE,
+				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
 			},
@@ -32,10 +32,10 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false,
 			},
-    })
-  },
+		})
+	},
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Appointments");
-  }
+	down: async (queryInterface, Sequelize) => {
+		await queryInterface.dropTable("Appointments");
+	}
 };

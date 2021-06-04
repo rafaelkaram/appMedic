@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert(
+	up: async (queryInterface, Sequelize) => {
+		return queryInterface.bulkInsert(
 			"Patients",
 			[
 				{
@@ -20,7 +20,7 @@ module.exports = {
 					email: "g.otaku@mail.com",
 					phone: "9868-9894",
 				},
-        {
+				{
 					name: "Camila Thamires",
 					email: "c.thamires@mail.com",
 					phone: "9911-5831",
@@ -38,9 +38,9 @@ module.exports = {
 			],
 			{}
 		);
-  },
+	},
 
-  down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("Patients", null, {});
-  }
+	down: async (queryInterface, Sequelize) => {
+		return queryInterface.bulkDelete("Patients", null, {});
+	}
 };
