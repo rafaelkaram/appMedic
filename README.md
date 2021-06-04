@@ -12,8 +12,8 @@
   
   Criação e inserção no banco:
     - Instalar as dependências necessárias
-      * npm install
+     * npm install
     - Criação de tabelas
-      * npx sequelize db:migrate
+     * npx sequelize db:migrate
     - População de tabelas
-      * npx sequelize db:seed:all
+     * npx sequelize db:seed:all
