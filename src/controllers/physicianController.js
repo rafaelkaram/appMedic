@@ -1,6 +1,5 @@
 const Physician = require("../models/Physician");
 const Sequelize = require("sequelize");
-const Appointments = require("../models/Appointment");
 
 module.exports = {
   async listAllPhysicians(req, res) {
@@ -48,6 +47,7 @@ module.exports = {
           .json({ msg: "Não foi possível cadastrar novo médico." });
     }
   },
+
   async deletePhysician(req, res) {
     const physicianId = req.params.id;
     const deletedPhysician = await Physician.destroy({
@@ -67,6 +67,7 @@ module.exports = {
       res.status(200).json({ msg: "Médico excluido com sucesso." });
     else res.status(404).json({ msg: "Médico não encontrado." });
   },
+
   async updatePhysician(req, res) {
     const physicianId = req.body.id;
     const physician = req.body;

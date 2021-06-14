@@ -1,6 +1,5 @@
 const Patient = require("../models/Patient");
 const Sequelize = require("sequelize");
-const Appointments = require("../models/Appointment");
 
 module.exports = {
   async listAllPatients(req, res) {
@@ -15,6 +14,36 @@ module.exports = {
         res.status(404).json({ msg: "Não foi possível encontrar pacientes." });
       else res.status(200).json({ patients });
     else res.status(404).json({ msg: "Não foi possível encontrar pacientes." });
+  },
+
+  async searchPatientByName(req, res) {
+    const name = req.params.name;
+    const patient = await Patient.findOne({
+      where: { name },
+    }).catch((error) => {
+      res.status(500).json({ msg: "Falha na conexão." });
+    });
+
+    if (patient)
+      if (patient == "")
+        res.status(404).json({ msg: "Não foi possível encontrar paciente." });
+      else res.status(200).json({ patient });
+    else res.status(404).json({ msg: "Não foi possível encontrar paciente." });
+  },
+
+  async searchPatientByPhysicianId(req, res) {
+    const physicianId = req.params.id;
+    const patient = await Patient.findOne({
+      where: { physicianId },
+    }).catch((error) => {
+      res.status(500).json({ msg: "Falha na conexão." });
+    });
+
+    if (patient)
+      if (patient == "")
+        res.status(404).json({ msg: "Não foi possível encontrar paciente." });
+      else res.status(200).json({ patient });
+    else res.status(404).json({ msg: "Não foi possível encontrar paciente." });
   },
 
   async newPatient(req, res) {
@@ -48,6 +77,7 @@ module.exports = {
           .json({ msg: "Não foi possível cadastrar novo paciente." });
     }
   },
+
   async deletePatient(req, res) {
     const patientId = req.params.id;
     const deletedPatient = await Patient.destroy({
@@ -67,6 +97,7 @@ module.exports = {
       res.status(200).json({ msg: "Paciente excluido com sucesso." });
     else res.status(404).json({ msg: "Paciente não encontrado." });
   },
+
   async updatePatient(req, res) {
     const patientId = req.body.id;
     const patient = req.body;

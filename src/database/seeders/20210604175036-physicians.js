@@ -17,7 +17,7 @@ module.exports = {
 				},
 				{
 					name: "Carlos Felipe Godinho da Silva",
-					email: "c.felipe@ufpr.br",
+					email: "cfelipe@ufpr.br",
 					password: "123",
 				},
 

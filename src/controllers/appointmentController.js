@@ -17,6 +17,38 @@ module.exports = {
     else res.status(404).json({ msg: "Não foi possível encontrar exames." });
   },
 
+  async searchAppointmentByPhysicianId(req, res) {
+    const physicianId = req.params.id;
+    const appointments = await Appointment.findAll({
+      where: { physicianId },
+      order: [["id", "ASC"]],
+    }).catch((error) => {
+      res.status(500).json({ msg: "Falha na conexão." });
+    });
+
+    if (appointments)
+      if (appointments == "")
+        res.status(404).json({ msg: "Não foi possível encontrar exames." });
+      else res.status(200).json({ appointments });
+    else res.status(404).json({ msg: "Não foi possível encontrar exames." });
+  },
+
+  async searchAppointmentByPatientId(req, res) {
+    const patientId = req.params.id;
+    const appointments = await Appointment.findAll({
+      where: { patientId },
+      order: [["id", "ASC"]],
+    }).catch((error) => {
+      res.status(500).json({ msg: "Falha na conexão." });
+    });
+
+    if (appointments)
+      if (appointments == "")
+        res.status(404).json({ msg: "Não foi possível encontrar exames." });
+      else res.status(200).json({ appointments });
+    else res.status(404).json({ msg: "Não foi possível encontrar exames." });
+  },
+
   async newAppointment(req, res) {
     const { physicianId, patientId, description, appointmentDate } = req.body;
     if (!physicianId || !patientId || !description) {
@@ -50,6 +82,7 @@ module.exports = {
           .json({ msg: "Não foi possível cadastrar novo exame." });
     }
   },
+
   async deleteAppointment(req, res) {
     const appointmentId = req.params.id;
     const deletedAppointment = await Appointment.destroy({
@@ -69,6 +102,7 @@ module.exports = {
       res.status(200).json({ msg: "Exame excluido com sucesso." });
     else res.status(404).json({ msg: "Exame não encontrado." });
   },
+
   async updateAppointment(req, res) {
     const appointmentId = req.body.id;
     const appointment = req.body;
