@@ -20,11 +20,35 @@
 
   ### Endpoints:
    #### Rotas de Médicos:
-   ##### rota para listar todos os médicos
+   ##### Listar todos os médicos
       http://localhost:3000/physician/list
-   ##### rota para criar médicos
+   ##### Cadastrar novos médicos
       http://localhost:3000/physician/create
-   ##### rota para remover médicos a partir do id
+   ##### Remover médicos a partir do id
       http://localhost:3000/physician/remove/#id
-   ##### rota para atualizar dados de médicos
+   ##### Atualizar dados de médicos
       http://localhost:3000/physician/update
+
+   #### Rotas de Pacientes:
+   ##### Listar todos os pacientes
+      http://localhost:3000/patient/list
+   ##### Buscar paciente a partir do nome
+      http://localhost:3000/patient/search/#name
+   ##### Buscar pacientes a partir do médico que o antende
+      http://localhost:3000/patient/physician/#id
+   ##### Cadastrar novos pacientes
+      http://localhost:3000/patient/create
+   ##### Atualizar dados de paciente
+      http://localhost:3000/patient/update
+
+   #### Rotas de Consultas:
+   ##### Listar todos as consultas
+      http://localhost:3000/appointment/list
+   ##### Buscar consulta a partir do id do paciente
+      http://localhost:3000/appointment/patient/#id
+   ##### Buscar consulta a partir do id do médico
+      http://localhost:3000/appointment/physician/#id
+   ##### Cadastrar novas consultas
+      http://localhost:3000/appointment/create
+   ##### Remover consulta a partir do id
+      http://localhost:3000/appointment/remove/#id

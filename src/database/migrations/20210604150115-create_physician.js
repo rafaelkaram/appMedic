@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Physicians", {
-      id: {
+	up: async (queryInterface, Sequelize) => {
+		await queryInterface.createTable("Physicians", {
+			id: {
 				type: Sequelize.INTEGER,
 				primaryKey: true,
 				autoIncrement: true,
@@ -33,11 +33,10 @@ module.exports = {
 					"CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
 				),
 			},
-    })
-   
-  },
+		});   
+	},
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Physicians");
-  }
+	down: async (queryInterface, Sequelize) => {
+		await queryInterface.dropTable("Physicians");
+	}
 };

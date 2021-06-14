@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Patients", {
-      id: {
+	up: async (queryInterface, Sequelize) => {
+		await queryInterface.createTable("Patients", {
+			id: {
 				type: Sequelize.INTEGER,
 				primaryKey: true,
 				autoIncrement: true,
@@ -29,14 +29,14 @@ module.exports = {
 			updatedAt: {
 				type: Sequelize.DATE,
 				allowNull: false,
-				defaultValue: Sequelize.literal(
+				defaulValue: Sequelize.literal(
 					"CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
 				),
 			},
-    })
-  },
+		});
+  	},
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Patients");
-  }
+	down: async (queryInterface, Sequelize) => {
+		await queryInterface.dropTable("Patients");
+	}
 };

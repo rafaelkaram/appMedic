@@ -1,4 +1,5 @@
 const Patient = require("../models/Patient");
+const Appointments = require("../models/Appointment");
 const Sequelize = require("sequelize");
 
 module.exports = {
@@ -33,17 +34,36 @@ module.exports = {
 
   async searchPatientByPhysicianId(req, res) {
     const physicianId = req.params.id;
-    const patient = await Patient.findOne({
-      where: { physicianId },
+    const patients = await Patient.findAll({
+      include: [
+        {
+        model: Appointments,
+        required: true,
+        where: { physicianId }
+        }
+      ],
     }).catch((error) => {
-      res.status(500).json({ msg: "Falha na conexão." });
+      res.status(500).json({ msg: "Falha na conexão.", error });
     });
 
-    if (patient)
-      if (patient == "")
+    if (patients) {
+      if (patients == "")
         res.status(404).json({ msg: "Não foi possível encontrar paciente." });
-      else res.status(200).json({ patient });
-    else res.status(404).json({ msg: "Não foi possível encontrar paciente." });
+    } else {
+      res.status(404).json({ msg: "Não foi possível encontrar paciente." });
+    }
+
+    const patientList = patients.map(patient => {
+      return {
+        id: patient.id,
+        name: patient.name,
+        email: patient.email,
+        phone: patient.phone,
+        createdAt: patient.createdAt,
+        updatedAt: patient.updatedAt
+      }
+    });
+    res.status(200).json({ patients: patientList })
   },
 
   async newPatient(req, res) {

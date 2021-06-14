@@ -44,7 +44,7 @@ module.exports = {
 					"CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
 				),
 			},
-		})
+		});
 	},
 
 	down: async (queryInterface, Sequelize) => {
