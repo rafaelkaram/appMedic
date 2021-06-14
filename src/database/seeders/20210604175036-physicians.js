@@ -16,7 +16,7 @@ module.exports = {
 					password: "123",
 				},
 				{
-					name: "Carlos Felipe Godinho da Silva",
+					name: "Carlos Felipe Godinho Silva",
 					email: "cfelipe@ufpr.br",
 					password: "123",
 				},

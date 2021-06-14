@@ -31,8 +31,8 @@ module.exports = {
 					phone: "9897-3138",
 				},
 				{
-					name: "Polly Silva",
-					email: "p.silva@mail.com",
+					name: "Polly Oliveira",
+					email: "p.oliveira@mail.com",
 					phone: "9864-9872",
 				},
 			],

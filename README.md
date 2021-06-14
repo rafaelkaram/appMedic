@@ -17,3 +17,14 @@
     npx sequelize db:migrate
    #### População de tabelas:
     npx sequelize db:seed:all
+
+  ### Endpoints:
+    #### Rotas de Médicos:
+      ##### rota para listar todos os médicos
+      http://localhost:3000/physician/list
+      ##### rota para criar médicos
+      http://localhost:3000/physician/create
+      ##### rota para remover médicos a partir do id
+      http://localhost:3000/physician/remove/#id
+      ##### rota para atualizar dados de médicos
+      http://localhost:3000/physician/update
