@@ -20,6 +20,8 @@
 
   ### Endpoints:
    #### Rotas de Médicos:
+   ##### Autenticar e gerar token JWT de médico
+      http://localhost:3000/physician/authentication
    ##### Listar todos os médicos
       http://localhost:3000/physician/list
    ##### Cadastrar novos médicos
