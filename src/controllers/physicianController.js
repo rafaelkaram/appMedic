@@ -1,7 +1,55 @@
 const Physician = require("../models/Physician");
+const auth = require("../middleware/auth");
 const Sequelize = require("sequelize");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+const passwordValidation = (password) => {
+  if (password.lenght < 8)
+    return "Senha deve conter no mínimo 8 caracteres.";
+  else if (!password.match(/[a-zA-Z]/g))
+    return "Senha deve conter no mínimo uma letra.";
+  else if (!password.match(/[0-9]+/))
+    return "Senha deve conter no mínimo uma letra.";
+  else
+    return "OK";
+}
+
+const generateToken = (id) => {
+  const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: 82800,
+  });
+  console.log(token);
+  return token;
+}
 
 module.exports = {
+  async authentication(req, res) {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    if(!email || !password)
+      return res.status(400).json({ msg: "Campos obrigatórios vazios." });
+
+    try {
+      const physician = await Physician.findOne({
+        where: { email }
+      });
+      if (!physician)
+        return res.status(404).json({ msg: "Usuário ou senha inválidos." });
+      else {
+        if (bcrypt.compareSync(password, physician.password)) {
+          const token = generateToken(physician.id);
+          return res.status(200).json({ msg: "Autenticado com sucesso.", token });
+        }
+        else
+          return res.status(404).json({ msg: "Usuário ou senha inválidos." });
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
   async listAllPhysicians(req, res) {
     const physicians = await Physician.findAll({
       order: [["id", "ASC"]],
@@ -32,10 +80,17 @@ module.exports = {
     if (isPhysicianNew)
       res.status(403).json({ msg: "Médico já foi cadastrado." });
     else {
+      const passwordValid = passwordValidation(passwordValidation);
+      if (passwordValid !== 'OK')
+        return res.status(400).json({ msg: passwordValid });
+
+      const salt = bcrypt.genSaltSync(12);
+      const hash = bcrypt.hashSync(password, salt);
+
       const physician = await Physician.create({
         name,
         email,
-        password,
+        password: hash,
       }).catch((error) => {
         res.status(500).json({ msg: "Não foi possível inserir os dados." });
       });

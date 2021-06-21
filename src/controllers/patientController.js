@@ -37,9 +37,9 @@ module.exports = {
     const patients = await Patient.findAll({
       include: [
         {
-        model: Appointments,
-        required: true,
-        where: { physicianId }
+          model: Appointments,
+          required: true,
+          where: { physicianId }
         }
       ],
     }).catch((error) => {
